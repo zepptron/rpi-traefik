@@ -6,7 +6,7 @@ script:
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 - export TAG=`if [[ $TRAVIS_PULL_REQUEST == "false" ]] && [[ $TRAVIS_BRANCH == "master"
   ]]; then echo "latest"; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi`
-- export REPO=zepp/rpi-slackin
+- export REPO=zepp/rpi-traefik
 - docker build -t $REPO:$TAG .
 after_success:
 - docker login -u="$HUB_USER" -p="$HUB_PASS"
@@ -17,7 +17,7 @@ after_success:
 notifications:
   slack:
     rooms:
-      secure: gt7GOLM+R27HhRNmFrWJr1GJ0SfjKF/m/1AI5U+IkYhisInA+z0eReoKmy+x3nMLjOep7qtLbwaXjTY53Ctwm1HtzJ+FR1pUGSzwb5Fp0htvaeAg5w082FoIP8pmtFmbaroyRiaYUQtaR/Ae8eeieU7jV2FsXb6/Gs2UHxokz/N6VG4TNFa9C5CqaZSveIgQ8MN0o+EF8oJu6Zojnf1j/yKysYUsNCupAE5BaV4+4Kf3IZria/YW4thysj22F9Bm+uebiEXnezEhM4MV5mQxohGqiPC/YGdV8OnLS9azLmz+Xamh94cGUICJdbAWzeEAKcAxS9rujzPDV7ITn3582uZJ9DavAS8JzYFKbIzvmaIxJMTyVH59g7SvV6h1jGkPz1bBdAGk4nht/8Rv5ehQudaw94Us1gduPi6uAOMqKwQUC6WuyOZ8UTB0+8oOFQtYZ0Am9jEXFRWx/qs61gU2HSR10YqI1j1r5FUPPfO7AXrLEnbhUiu9ml8vGizo0cKLFboatxiyCE+LwWpeEc/MNcm4dDXAapDXsbvVeQkMQM72VErPSW1X+fNpzpedulMCsJcVKnd69LblOjT2l0G06EHVTJ6dj96wrt9X83HtXK5gJfbW9EHXR6i8x1MHUeD+8d/kDe5ViTmSXPz0maFkfJ8bM5tU91T+HviD0ZH8QIU=
+      secure: MsEwSwMei8u3WRHn5SMIhyiaUJdq5bezla7aI4Zx7FWfRed8iWVY71AC5OVr468MRrtPW6gIsO3kohA7sfvUeXFeV3RI4GuBjfNFeEYeA55of5rz++I6JJFqiLKuqVpaWJxJ/pfcxxuKLW1/AYiPqQF3mVo4aHq/RI6GCJZCtDSfQCR8r6Eg4hKIo/t5FATcEzlvjfgQgi8GZ4EvDssl5Omq19DnTNSaHmRvNTmtHxmiilIjbOVsxRgKPQx3+6A+b7EnngCZJgiTz7sW2PXYQuHrFzaFjneq6UzQoXgFsnWsTbNk4l3SkHUjLvvJ5+FaVQFXIXxzkrFxKBmGAMc6aCNMGHU1TUsN2zSfw4/zh1ESCAZ6H1amBiIONBumxlt6Q8imHOgX47PQgwtdMdOUdWsRifIT1hMfl1c0+UXuOTk6FU73casi6TpflHkkMgQSOL82mswRuGT7BcakXMO9F9kvjmzjHi/ClYOMyU4qMyXMzfJsUxW6wVr4sw2Qh4Y+RgFksjAe/A0+NWtGhEY2OEytKdifQ/y4WoGKrSfGkbNAyyXCbe0uOaZ7yOgh5Uq43ditl54L9mCCJ1vHmwlhs4jSGYFWOAkjk2UqrxH77vTmOea1jyf3b0DVItxtZ4HL3AKM+/BsP5ECDWO2DQH6G1aj171QUzpRx2V5O8CzPO8=
     template:
     - "%{repository} (%{commit}) : %{message} "
     - 'Build number: %{build_number} - Commit message: %{commit_message}'
